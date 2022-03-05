@@ -58,39 +58,40 @@ function shuffle() {
 </script>
 
 <template>
-  <main>
+  <header>
     <h3>グループ分け分けするやつ</h3>
-    <textarea v-model="members"></textarea><br />
+  </header>
+  <main>
+    <textarea v-model="members"></textarea>
     <label>グループ数：</label>
     <input type="number" v-model="numOfGroups" />
     <button @click="shuffle()">shuffle</button>
-    <div class="left fixedwidth">
-      <div v-for="(r, i) in res" :key="i">
-        グループ{{ (i + 10).toString(36).toUpperCase() }}:
-        {{ r.map((s) => s + "さん").join("、") }}
-      </div>
-    </div>
+    <table>
+      <tr v-for="(r, i) in res" :key="i">
+        <td>グループ{{ (i + 10).toString(36).toUpperCase() }}</td>
+        <td>{{ r.map((s) => s + "さん").join("、") }}</td>
+      </tr>
+    </table>
   </main>
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@import "@exampledev/new.css";
+
+main {
+  max-width: 600px;
 }
-#app textarea {
-  height: 15rem;
-  width: 450px;
+
+textarea {
+  height: 12rem;
+  width: 100vh;
 }
-.left {
-  text-align: left;
+
+button {
+  float: right;
 }
-.fixedwidth {
-  width: 450px;
-  margin: 0 auto;
+
+table {
+  margin-top: 30px;
 }
 </style>
