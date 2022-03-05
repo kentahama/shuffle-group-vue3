@@ -1,19 +1,30 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+type Groups<T> = T[][];
+
+/**
+ * Returns randomly n-grouped array.
+ * @param a An array
+ * @param n Number of groups
+ */
+function randomGroup<T>(a: T[], n: number): Groups<T> {
+  const _a = [...a];
+  _a.sort(() => Math.random() - 0.5);
+  return Array.from(Array(n).keys(), (i) => _a.filter((_, j) => j % n === i));
+}
+
 const members = ref("alice\nbob\ncharlie\n");
 const numOfGroups = ref(2);
-
-const res = ref<string[][]>([]);
-const history: string[] | null = null;
+const res = ref<Groups<string>>([]);
+const history: Groups<string>[] = [];
 
 function shuffle() {
-  const mems = members.value.split("\n").filter(Boolean);
-  const ng = numOfGroups.value;
-  mems.sort(() => Math.random() - 0.5);
-  res.value = Array.from(Array(ng).keys(), (i) =>
-    mems.filter((_, j) => j % ng === i)
-  );
+  const names = members.value.split("\n").filter(Boolean);
+  const n = numOfGroups.value;
+  const random = randomGroup(names, n);
+  history.push(random);
+  res.value = random;
 }
 </script>
 
