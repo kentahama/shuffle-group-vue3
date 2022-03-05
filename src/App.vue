@@ -73,6 +73,11 @@ function shuffle() {
       </tr>
     </table>
   </main>
+  <footer>
+    <hr />
+    View source on
+    <a href="https://github.com/kentahama/shuffle-group-vue3">GitHub</a>
+  </footer>
 </template>
 
 <style>
@@ -93,5 +98,13 @@ button {
 
 table {
   margin-top: 30px;
+}
+
+footer {
+  margin-top: 60px;
+  max-width: 600px;
+  text-align: right;
+  font-size: 0.4rem;
+  color: #aaa;
 }
 </style>
