@@ -65,7 +65,7 @@ function shuffle() {
     <textarea v-model="members"></textarea>
     <label>グループ数：</label>
     <input type="number" v-model="numOfGroups" />
-    <button @click="shuffle()">shuffle</button>
+    <button @click="shuffle()">Shuffle</button>
     <table>
       <tr v-for="(r, i) in res" :key="i">
         <td>グループ{{ (i + 10).toString(36).toUpperCase() }}</td>
