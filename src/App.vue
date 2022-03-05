@@ -32,7 +32,26 @@ const history: Groups<string>[] = [];
 function shuffle() {
   const names = members.value.split("\n").filter(Boolean);
   const n = numOfGroups.value;
-  const random = randomGroup(names, n);
+  let random = randomGroup(names, n);
+  if (history.length > 0) {
+    const last = history[history.length - 1];
+    const threashold = 0.7;
+    let retry = 100;
+    while (
+      random.some((a) =>
+        last.some((b) => {
+          similarity(a, b) > threashold;
+        })
+      )
+    ) {
+      random = randomGroup(names, n);
+      retry--;
+      if (retry <= 0) {
+        console.warn("retry limit exceeded");
+        break;
+      }
+    }
+  }
   history.push(random);
   res.value = random;
 }
