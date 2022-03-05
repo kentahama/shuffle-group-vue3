@@ -14,6 +14,16 @@ function randomGroup<T>(a: T[], n: number): Groups<T> {
   return Array.from(Array(n).keys(), (i) => _a.filter((_, j) => j % n === i));
 }
 
+/**
+ * Non-symmetric set similarity; #A∩B/#B
+ * @param a An objective array
+ * @param b A base array
+ */
+function similarity<T>(a: T[], b: T[]): number {
+  const intersection = a.filter((v) => b.includes(v));
+  return intersection.length / b.length;
+}
+
 const members = ref("alice\nbob\ncharlie\n");
 const numOfGroups = ref(2);
 const res = ref<Groups<string>>([]);
